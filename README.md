@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Expense REST API
 
 ## Requirements
@@ -25,3 +26,6 @@ To build and run the application you need:
 
 ## Method 3
 The application is hosted on https://expenseapi.herokuapp.com
+=======
+
+>>>>>>> dfe499e17f3f7daf3451cc4237806bfc6bb68e25
