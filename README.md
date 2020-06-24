@@ -1,5 +1,5 @@
 # Expense REST API
-Expense REST API is an api that allows a use to perform CRUD operations on expenses. The user can 
+Expense REST API is an api that allows a user to perform CRUD operations on expenses. The user can 
 - Add an Expense
 - Retrieve all expenses
 - Retrieve an expense
