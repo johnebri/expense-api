@@ -9,6 +9,7 @@ Expense REST API is an api that allows a use to perform CRUD operations on expen
 ## Development tools
 - The application was developed with Spring boot 2.3.1
 - Test Framework used: Mockito
+- Server: Tomcat
 - Database used: PostgreSQL (remote elephant sql)
 - Hosted on Heroku
 
