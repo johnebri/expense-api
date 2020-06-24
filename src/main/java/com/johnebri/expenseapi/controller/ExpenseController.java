@@ -27,34 +27,42 @@ public class ExpenseController {
 	private final ExpenseServiceImpl expenseSvc;
 	private final UtilService utilSvc;
 
+	// inject Expense Service and Utility Service into Expense Controller
 	@Autowired
 	public ExpenseController(ExpenseServiceImpl expenseSvc, UtilService utilSvc) {
 		this.expenseSvc = expenseSvc;
 		this.utilSvc = utilSvc;
 	}
 
+	// get all expenses
 	@GetMapping
 	public ResponseEntity<List<Expense>> getAllExpenses() {
 		List<Expense> newExpense = expenseSvc.getAllExpenses();
 		return new ResponseEntity<List<Expense>>(newExpense, HttpStatus.OK);
 	}
 
+	// get an expense
 	@GetMapping("{expenseId}")
 	public Expense getAnExpense(@PathVariable("expenseId") int expenseId) {
+		
 		// check if expense exists
 		utilSvc.checkIfExpenseExists(expenseId);
+		
 		return expenseSvc.getAnExpense(expenseId);
 	}
 
+	// create an expense
 	@PostMapping
 	public ResponseEntity<Expense> createAnExpense(@Valid @RequestBody Expense expense) {
 		Expense newExpense = expenseSvc.createAnExpense(expense);
 		return new ResponseEntity<Expense>(newExpense, HttpStatus.CREATED);
 	}
 
+	// update an expense
 	@PutMapping("{expenseId}")
 	public ResponseEntity<Expense> updateAnExpense(@PathVariable("expenseId") int expenseId,
 			@Valid @RequestBody Expense expense) {
+
 		// check if expense exists
 		utilSvc.checkIfExpenseExists(expenseId);
 
@@ -67,10 +75,13 @@ public class ExpenseController {
 		return new ResponseEntity<Expense>(updatedExpense, HttpStatus.OK);
 	}
 
+	// delete an expense
 	@DeleteMapping("{expenseId}")
 	public ResponseEntity<String> deleteAnExpense(@PathVariable("expenseId") int expenseId) {
+
 		// check if expense exists
 		utilSvc.checkIfExpenseExists(expenseId);
+
 		expenseSvc.deleteAnExpense(expenseId);
 		return new ResponseEntity<String>("Expense Deleted", HttpStatus.OK);
 	}

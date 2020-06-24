@@ -13,6 +13,7 @@ public class UtilService {
 	@Autowired
 	ExpenseRepository expenseRepo;
 
+	// check if expense exists, throw a ResponseStatusExceptio of NOT_FOUND if expense does not exist
 	public void checkIfExpenseExists(int expenseId) {
 		
 		if (!expenseRepo.findById(expenseId).isPresent()) {
