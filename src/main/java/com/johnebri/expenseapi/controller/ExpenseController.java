@@ -57,6 +57,12 @@ public class ExpenseController {
 			@Valid @RequestBody Expense expense) {
 		// check if expense exists
 		utilSvc.checkIfExpenseExists(expenseId);
+
+		// get the expense
+		Expense retrievedExp = expenseSvc.getAnExpense(expenseId);
+		expense.setDateTimeCreated(retrievedExp.getDateTimeCreated());
+
+		// update the expense
 		Expense updatedExpense = expenseSvc.updateAnExpense(expenseId, expense);
 		return new ResponseEntity<Expense>(updatedExpense, HttpStatus.OK);
 	}
