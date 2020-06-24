@@ -10,7 +10,7 @@ public class HomeController {
 	public String home() {
 		return (
 				"<div style=margin:200px auto;><h2>Expense REST API developed by John Ebri</h2>"
-				+ "<a href='https://documenter.getpostman.com/view/9082520/SzzrWtcX?version=latest#8b25dc18-d89b-46a8-a38d-924446387ac3'>"
+				+ "<a href='https://documenter.getpostman.com/view/9082520/SzzrWtcX'>"
 				+ "<button style=background:#6CA76E;color:white;padding:9px;text-decoration:none;>Go to Documentation</button></a></div>"	
 		);
 	}
