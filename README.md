@@ -6,22 +6,21 @@ To build and run the application you need:
 - [MySQL](https://https://dev.mysql.com/downloads/installer/)
 
 ## Method 1
-1. Clone this repo into your computer
+1. Clone the repository
 2. Open project directory in a terminal
 3. Run the command 
-  - (for Windows users) mvnw spring-boot:run
+  - (for Windows users using windows command prompt app) mvnw spring-boot:run
   - (for MacOS/Linux users) ./mvnw spring-boot:run
-4. Application is started on http://localhost:8080
-5. If port 8080 is already used by another application in your computer, open the application.properties file and change port with 'server.port=8181'
 
 ## Method 2
-1. Clone the repository into your computer
+1. Clone the repository
 2. Open the project directory in a terminal
-3. run "mvn package",  a .jar file will be generated in the target directory of the project
+3. run "mvn package", to build a jar file in the target directory of the project
 4. Navigate to target directory, cd target
-5. Run java -jar [name_of_file_file]
-6. Application is started on http://localhost:8080
-7. If port 8080 is already used by another application in your computer, open the application.properties file and change port with 'server.port=8181'
+5. Run java -jar expenseapi-0.0.1-SNAPSHOT.jar to execute the jar file
+
+ - Application is started on http://localhost:8080
+ - If port 8080 is already used by another application in your computer, open the application.properties file and change port with 'server.port=8181'
 
 ## Method 3
 The application is hosted on https://expenseapi.herokuapp.com
