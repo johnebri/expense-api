@@ -1,7 +1,6 @@
 package com.johnebri.expenseapi.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,12 +12,10 @@ import com.johnebri.expenseapi.data.Expense;
 public class ExpenseServiceImpl implements ExpenseService {
 
 	private final ExpenseRepository expenseRepo;
-	private final UtilService utilSvc;
 
 	@Autowired
-	public ExpenseServiceImpl(ExpenseRepository expenseRepo, UtilService utilSvc) {
+	public ExpenseServiceImpl(ExpenseRepository expenseRepo) {
 		this.expenseRepo = expenseRepo;
-		this.utilSvc = utilSvc;
 	}
 
 	@Override
@@ -27,12 +24,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 	}
 
 	@Override
-	public Optional<Expense> getAnExpense(int expenseId) {
-
-		// check if expense exists
-		utilSvc.checkIfExpenseExists(expenseId);
-
-		return expenseRepo.findById(expenseId);
+	public Expense getAnExpense(int expenseId) {
+		return expenseRepo.findExpenseById(expenseId);
 	}
 
 	@Override
@@ -42,20 +35,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
 	@Override
 	public Expense updateAnExpense(int expenseId, Expense expenseUpdate) {
-
-		// check if expense exists
-		utilSvc.checkIfExpenseExists(expenseId);
-
 		expenseUpdate.setId(expenseId);
 		return expenseRepo.save(expenseUpdate);
 	}
 
 	@Override
-	public void deleteAnExpense(int expenseId) {
-		
-		// check if expense exists
-		utilSvc.checkIfExpenseExists(expenseId);
-		
+	public void deleteAnExpense(int expenseId) {		
 		expenseRepo.deleteById(expenseId);
 	}
 

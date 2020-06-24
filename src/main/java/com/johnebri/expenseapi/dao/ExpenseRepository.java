@@ -7,5 +7,5 @@ import com.johnebri.expenseapi.data.Expense;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<Expense, Integer>{
-
+	Expense findExpenseById(int id);
 }

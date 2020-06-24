@@ -1,7 +1,6 @@
 package com.johnebri.expenseapi.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -19,16 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.johnebri.expenseapi.data.Expense;
 import com.johnebri.expenseapi.service.ExpenseServiceImpl;
+import com.johnebri.expenseapi.service.UtilService;
 
 @RestController
 @RequestMapping("api/v1/expense")
 public class ExpenseController {
 
 	private final ExpenseServiceImpl expenseSvc;
+	private final UtilService utilSvc;
 
 	@Autowired
-	public ExpenseController(ExpenseServiceImpl expenseSvc) {
+	public ExpenseController(ExpenseServiceImpl expenseSvc, UtilService utilSvc) {
 		this.expenseSvc = expenseSvc;
+		this.utilSvc = utilSvc;
 	}
 
 	@GetMapping
@@ -38,7 +40,9 @@ public class ExpenseController {
 	}
 
 	@GetMapping("{expenseId}")
-	public Optional<Expense> getAnExpense(@PathVariable("expenseId") int expenseId) {
+	public Expense getAnExpense(@PathVariable("expenseId") int expenseId) {
+		// check if expense exists
+		utilSvc.checkIfExpenseExists(expenseId);
 		return expenseSvc.getAnExpense(expenseId);
 	}
 
@@ -49,14 +53,18 @@ public class ExpenseController {
 	}
 
 	@PutMapping("{expenseId}")
-	public ResponseEntity<Expense> updateAnExpense(@Valid @PathVariable("expenseId") int expenseId,
-			@RequestBody Expense expense) {
+	public ResponseEntity<Expense> updateAnExpense(@PathVariable("expenseId") int expenseId,
+			@Valid @RequestBody Expense expense) {
+		// check if expense exists
+		utilSvc.checkIfExpenseExists(expenseId);
 		Expense updatedExpense = expenseSvc.updateAnExpense(expenseId, expense);
 		return new ResponseEntity<Expense>(updatedExpense, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("{expenseId}")
 	public ResponseEntity<String> deleteAnExpense(@PathVariable("expenseId") int expenseId) {
+		// check if expense exists
+		utilSvc.checkIfExpenseExists(expenseId);
 		expenseSvc.deleteAnExpense(expenseId);
 		return new ResponseEntity<String>("Expense Deleted", HttpStatus.OK);
 	}
